@@ -2,6 +2,7 @@ package com.rgp.game.rpg.Domain.Auth;
 
 
 import com.rgp.game.rpg.Config.JWTConfiguration;
+import com.rgp.game.rpg.DTO.LoginDTO;
 import com.rgp.game.rpg.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

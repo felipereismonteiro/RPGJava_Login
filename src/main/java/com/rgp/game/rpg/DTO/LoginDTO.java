@@ -1,6 +1,5 @@
-package com.rgp.game.rpg.Domain.Auth;
+package com.rgp.game.rpg.DTO;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -15,11 +14,7 @@ public record LoginDTO(
     String usernameOrEmail,
 
     @NotBlank(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
-    @Pattern(
-        regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-        message = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
-    )
+    @Size(min = 4, message = "Password must be at least 8 characters long")
     String password
 ) {
 }
