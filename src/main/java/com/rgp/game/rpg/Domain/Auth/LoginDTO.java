@@ -6,14 +6,13 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record LoginDTO(
-    @NotBlank(message = "Username is required")
-    @Size(max = 100, message = "Username can have up to 100 characters")
-    String username,
-
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
-    @Size(max = 100, message = "Email can have up to 100 characters")
-    String email,
+    @NotBlank(message = "Username or Email is required")
+    @Size(max = 100, message = "Username or Email can have up to 100 characters")
+    @Pattern(
+        regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$|^[A-Za-z0-9._%+-]{1,100}$",
+        message = "Invalid format for Username or Email"
+    )
+    String usernameOrEmail,
 
     @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 8 characters long")

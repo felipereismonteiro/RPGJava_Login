@@ -74,6 +74,11 @@
 			<artifactId>javax.el</artifactId>
 			<version>3.0.0</version> <!-- Necessário para o uso das expressões EL no Hibernate Validator -->
 		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

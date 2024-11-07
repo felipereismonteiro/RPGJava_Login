@@ -1,6 +1,7 @@
 package com.rgp.game.rpg.Domain.Auth;
 
 
+import com.rgp.game.rpg.Config.JWTConfiguration;
 import com.rgp.game.rpg.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,8 +14,11 @@ public class AuthService {
     @Autowired
     private AuthRepository authRepository;
 
+    @Autowired
+    private JWTConfiguration jwtConfiguration;
+
     public String login(LoginDTO loginDTO) throws Exception {
-        Optional<User> userFounded = authRepository.findByUsernameOrFindByEmail(loginDTO.username(), loginDTO.email());
+        Optional<User> userFounded = authRepository.findByUsernameOrEmail(loginDTO.usernameOrEmail());
 
         if (userFounded.isEmpty()) {
             throw new Exception("User not found");
@@ -25,7 +29,6 @@ public class AuthService {
             throw new Exception("Invalid password");
         }
 
-        // TODO gerar o TOKEN JWT
-        return "Success";
+        return jwtConfiguration.generateToken(loginDTO.usernameOrEmail());
     }
 }
