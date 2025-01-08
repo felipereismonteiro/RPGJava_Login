@@ -21,7 +21,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody @Valid LoginDTO loginDTO) {
         try {
             String token = authService.login(loginDTO);
-            return ResponseEntity.ok(new ResponseLoginDTO(token, "Success"));
+            return ResponseEntity.ok(new ResponseLoginDTO(token, "Logado com sucesso"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
