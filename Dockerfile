@@ -11,6 +11,6 @@ FROM openjdk:17-jdk-slim
 
 EXPOSE 8080
 
-COPY --from=BUILD target/RPG-Java.jar /app.jar
+COPY --from=BUILD target/*.jar /*.jar
 
 ENTRYPOINT ["java", "-jar", "/app.jar"]
