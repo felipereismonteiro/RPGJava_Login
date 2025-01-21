@@ -1,27 +1,16 @@
-# Etapa 1: Build da aplicação Java usando Maven
-FROM maven:3.8.6-openjdk-17 AS builder
+FROM ubuntu:latest as BUILD
 
-# Defina o diretório de trabalho no container
-WORKDIR /app
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY . .
 
-# Copie os arquivos do projeto para o container
-COPY pom.xml .
-COPY src ./src
+RUN apt-get install maven -y
+RUN mvn clean install
 
-# Execute o Maven para empacotar a aplicação
-RUN mvn clean install -DskipTests
-
-# Etapa 2: Construção da imagem final para rodar o JAR
 FROM openjdk:17-jdk-slim
 
-# Defina o diretório de trabalho no container
-WORKDIR /app
-
-# Copie o arquivo JAR gerado na etapa de build para esta etapa
-COPY --from=builder /app/target/*.jar /app/app.jar
-
-# Expor a porta da aplicação
 EXPOSE 8080
 
-# Comando para executar a aplicação
-CMD ["java", "-jar", "/app/app.jar"]
+COPY --from=BUILD /target/*.jar /app.jar
+
+ENTRYPOINT ["java", "-jar", "/app.jar"]
